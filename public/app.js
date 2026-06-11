@@ -161,10 +161,16 @@ function showMoveMenu(taskId) {
   const existing = document.getElementById('moveMenu');
   if (existing) existing.remove();
 
+  const btn = event.target.closest('button');
+  const rect = btn.getBoundingClientRect();
+
   const menu = document.createElement('div');
   menu.id = 'moveMenu';
   menu.className = 'move-menu show';
   menu.style.position = 'fixed';
+  menu.style.top = (rect.bottom + 5) + 'px';
+  menu.style.left = rect.left + 'px';
+  menu.style.zIndex = '9999';
   menu.innerHTML = html;
   document.body.appendChild(menu);
 
@@ -201,7 +207,6 @@ function editTask(id) {
   document.getElementById('assignee').value = task.assignee || '';
   document.getElementById('start_date').value = task.start_date || '';
   document.getElementById('due_date').value = task.due_date || '';
-  document.getElementById('completion_date').value = task.completion_date || '';
 
   editingId = id;
   document.getElementById('modalTitle').textContent = 'Edit Task';
@@ -278,7 +283,6 @@ function clearInputs() {
   document.getElementById('assignee').value = '';
   document.getElementById('start_date').value = '';
   document.getElementById('due_date').value = '';
-  document.getElementById('completion_date').value = '';
 }
 
 let draggedId = null;
