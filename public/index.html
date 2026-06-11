@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Task Board</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        <h1>Team Task Board</h1>
+      </div>
+      <div class="header-right">
+        <span class="user-name" id="userName"></span>
+        <a href="/admin.html" id="adminLink" style="display:none;">Admin</a>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="board-header">
+      <div class="stats">
+        <span id="taskCount">0 tasks total</span>
+      </div>
+      <button class="btn-add" onclick="openModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+        Add Task
+      </button>
+    </div>
+
+    <div class="board">
+      <div class="column" data-status="todo">
+        <div class="column-header">
+          <div class="column-title">
+            <div class="dot" style="background:#f59e0b"></div>
+            <span>To Do</span>
+            <span class="count" id="count-todo">0</span>
+          </div>
+        </div>
+        <div class="task-list" id="todo"></div>
+      </div>
+
+      <div class="column" data-status="doing">
+        <div class="column-header">
+          <div class="column-title">
+            <div class="dot" style="background:#3b82f6"></div>
+            <span>Doing</span>
+            <span class="count" id="count-doing">0</span>
+          </div>
+        </div>
+        <div class="task-list" id="doing"></div>
+      </div>
+
+      <div class="column" data-status="done">
+        <div class="column-header">
+          <div class="column-title">
+            <div class="dot" style="background:#10b981"></div>
+            <span>Done</span>
+            <span class="count" id="count-done">0</span>
+          </div>
+        </div>
+        <div class="task-list" id="done"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Task</h2>
+        <button class="btn-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="title" placeholder="Enter task title" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="description" rows="3" placeholder="Add description..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Priority</label>
+            <select id="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Assignee</label>
+            <input type="text" id="assignee" placeholder="Name" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="date" id="start_date" />
+          </div>
+          <div class="form-group">
+            <label>Due Date</label>
+            <input type="date" id="due_date" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Completion Date</label>
+          <input type="date" id="completion_date" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveTask()">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

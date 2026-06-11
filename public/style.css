@@ -1,0 +1,86 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #f3f4f6; min-height: 100vh; }
+
+.header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-content { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo h1 { font-size: 20px; font-weight: 700; color: #1f2937; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.user-name { font-size: 14px; color: #6b7280; font-weight: 500; }
+#adminLink { color: #2563eb; text-decoration: none; font-weight: 500; font-size: 14px; }
+#adminLink:hover { text-decoration: underline; }
+.btn-logout { padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; }
+.btn-logout:hover { background: #f9fafb; }
+
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+.board-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.stats { font-size: 14px; color: #6b7280; }
+.btn-add { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.btn-add:hover { background: #1d4ed8; }
+
+.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.column { background: #f9fafb; border-radius: 12px; padding: 16px; min-height: 500px; }
+.column-header { margin-bottom: 16px; }
+.column-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #374151; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.count { margin-left: auto; background: #e5e7eb; padding: 2px 8px; border-radius: 9999px; font-size: 12px; color: #6b7280; }
+.task-list { display: flex; flex-direction: column; gap: 12px; }
+
+.task { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); cursor: grab; border: 1px solid transparent; transition: all 0.2s; }
+.task:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #e5e7eb; }
+.task.dragging { opacity: 0.5; transform: rotate(2deg); }
+.task.overdue { border-left: 3px solid #ef4444; }
+.task-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.task-title-row { display: flex; align-items: center; gap: 8px; flex: 1; }
+.drag-handle { color: #9ca3af; cursor: grab; flex-shrink: 0; }
+.task h3 { font-size: 15px; font-weight: 600; color: #1f2937; line-height: 1.4; }
+.task-actions { display: flex; gap: 4px; }
+.task-actions button { padding: 6px; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: #9ca3af; }
+.task-actions button:hover { background: #f3f4f6; color: #374151; }
+.btn-edit:hover { color: #2563eb; }
+.btn-delete:hover { color: #ef4444; }
+.task-description { font-size: 13px; color: #6b7280; line-height: 1.5; margin-bottom: 12px; }
+.task-footer { display: flex; align-items: center; justify-content: space-between; }
+.priority { padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+.priority.low { background: #d1fae5; color: #065f46; }
+.priority.medium { background: #fef3c7; color: #92400e; }
+.priority.high { background: #fee2e2; color: #991b1b; }
+.priority.todo { background: #fef3c7; color: #92400e; }
+.priority.doing { background: #dbeafe; color: #1e40af; }
+.priority.done { background: #d1fae5; color: #065f46; }
+.task-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #9ca3af; }
+.task-meta span { display: flex; align-items: center; gap: 4px; }
+.task-meta .overdue { color: #ef4444; font-weight: 500; }
+
+.move-dropdown { position: relative; }
+.move-menu { display: none; position: absolute; right: 0; top: 100%; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 50; min-width: 160px; padding: 4px; }
+.move-menu.show { display: block; }
+.move-menu button { display: block; width: 100%; padding: 8px 12px; text-align: left; border: none; background: none; border-radius: 6px; font-size: 13px; color: #374151; cursor: pointer; }
+.move-menu button:hover { background: #f3f4f6; }
+
+.column.drag-over { background: #e5e7eb; border: 2px dashed #9ca3af; }
+
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; padding: 24px; }
+.modal-overlay.show { display: flex; }
+.modal { background: #fff; border-radius: 16px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #e5e7eb; }
+.modal-header h2 { font-size: 18px; font-weight: 700; color: #1f2937; }
+.btn-close { background: none; border: none; font-size: 24px; color: #9ca3af; cursor: pointer; line-height: 1; }
+.btn-close:hover { color: #374151; }
+.modal-body { padding: 24px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: inherit; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid #e5e7eb; }
+.btn-secondary { padding: 10px 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; }
+.btn-secondary:hover { background: #f9fafb; }
+.btn-primary { padding: 10px 20px; border: none; border-radius: 8px; background: #2563eb; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
+.btn-primary:hover { background: #1d4ed8; }
+
+@media (max-width: 768px) {
+  .board { grid-template-columns: 1fr; }
+  .header-content { padding: 0 16px; }
+  .container { padding: 16px; }
+}
