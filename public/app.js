@@ -223,8 +223,7 @@ async function saveTask() {
     priority: document.getElementById('priority').value,
     assignee: document.getElementById('assignee').value,
     start_date: document.getElementById('start_date').value,
-    due_date: document.getElementById('due_date').value,
-    completion_date: document.getElementById('completion_date').value
+    due_date: document.getElementById('due_date').value
   };
 
   if (editingId) {
